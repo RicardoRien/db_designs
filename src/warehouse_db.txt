@@ -1,0 +1,51 @@
+enum product_status {
+  in_stock
+  out_of_stock
+  running_low
+}
+
+enum order_status {
+  placed
+  confirm
+  processed
+  completed
+}
+
+table product {
+  id integer [pk, increment]
+  merchant_id int [ref: > merchant.id]
+  serial varchar
+  name varchar(200)
+  price float(8,2)
+  status product_status 
+  stock int
+  created_at timestamp [default: 'now()']
+}
+
+table merchant {
+  id integer [pk, increment]
+  country varchar [ref: > country.id]
+  name varchar
+  created_at timestamp [default: 'now()']
+}
+
+table country {
+  id integer [pk, increment]
+  name varchar
+}
+
+table order {
+  id integer [pk, increment]
+  status order_status
+  user_id int
+  total float(12,2)
+
+  created_at timestamp [default: 'now()']
+}
+
+table order_item {
+  id integer [pk, increment]
+  order_id int [ref: > order.id]
+  product_id int [ref: > product.id]
+  quantity int
+}

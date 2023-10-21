@@ -1,0 +1,53 @@
+Table users {
+  user_id integer [pk, increment]
+  name varchar [not null]
+  email varchar [not null, unique]
+  password varchar [not null]
+  role varchar [not null]
+  phone_number varchar
+  description text
+  profile_image varchar
+  created_at timestamp [default: 'now()']
+  updated_at timestamp [default: 'now()']
+}
+
+Table reservations {
+  reservation_id integer [pk, increment]
+  user_id integer [ref: > users.user_id]
+  room_id integer [ref: > rooms.room_id]
+  start_date timestamp [not null]
+  end_at timestamp [not null]
+  price int
+  total int
+  created_at timestamp [default: 'now()']
+  updated_at timestamp [default: 'now()']
+}
+
+Table rooms {
+  room_id integer [pk, increment]
+  price int
+  owner_id int
+  home_type varchar
+  room_type varchar
+  summary varchar
+  address varchar
+  total_ocucupacy int
+  total_bedrooms int
+  total_bathrooms int
+  has_tv boolean
+  has_kitchen boolean
+  has_heating boolean
+  has_internet boolean
+  has_air_conditioning boolean
+  published_at timestamp [not null]
+  created_at timestamp [default: 'now()']
+  updated_at timestamp [default: 'now()']
+}
+
+Table reviews {
+  reviews_id integer [pk, increment]
+  reservation_id integer [ref: - reservations.reservation_id]
+  rating int
+  comment text
+  created_at timestamp [default: 'now()']
+}
