@@ -6,6 +6,7 @@
 
 ## Medium
 >like medium.com
+
 ![Medium Database](./media/db_medium.png "Medium Database").
 
 ## Airbnb
